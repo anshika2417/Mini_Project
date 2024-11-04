@@ -41,30 +41,6 @@ def average():
     else:
         print("No data for that date.\n")
 
-def maxUsage():
-    data = dataLoad()
-    date = input("Enter the date (dd-mm-yyyy): ")
-    filtered = data[data["Date"] == date]
-    if len(filtered) > 0:
-        apps = ["YouTube", "Spotify", "WhatsApp", "LPUTouch", "Chrome", "Phone", "Snapchat", "Instagram", "LinkedIn"]
-        max_app = filtered[apps].idxmax(axis=1).values[0]
-        max_time = filtered[apps].max(axis=1).values[0]
-        print(f"Most used app on {date} was {max_app} with {max_time} minutes\n")
-    else:
-        print("No data for that date.\n")
-
-def minUsage():
-    data = dataLoad()
-    date = input("Enter the date (dd-mm-yyyy): ")
-    filtered = data[data["Date"] == date]
-    if len(filtered) > 0:
-        apps = ["YouTube", "Spotify", "WhatsApp", "LPUTouch", "Chrome", "Phone", "Snapchat", "Instagram", "LinkedIn"]
-        min_app = filtered[apps].idxmin(axis=1).values[0]
-        min_time = filtered[apps].min(axis=1).values[0]
-        print(f"Least used app on {date} was {min_app} with {min_time} minutes\n")
-    else:
-        print("No data for that date.\n")
-
 def totalTime():
     
     data = dataLoad()
@@ -103,6 +79,7 @@ def overallUsage():
     
     choice = int(input("Do you want to see the day with the highest or lowest overall screen time? (Press 1 = 'highest' or 2 = 'lowest'):"))
     
+    
     if choice == 1:
         max_day = data['TotalScreenTime'].idxmax()
         max_date = data.loc[max_day, 'Date']
@@ -122,30 +99,24 @@ while True:
     print("\n<------------------------------------->")
     print("1. Show Data Information")
     print("2. Calculate Average Screen Time")
-    print("3. Find Maximum Time Usage")
-    print("4. Find Minimum Time Usage")
-    print("5. Calculate Total Screen Time")
-    print("6. Show Screen Time Summary")
-    print("7. Show Day with Overall Screen Time")
-    print("8. Exit\n")
-    choice = input("Choose an option (1-8): ")
+    print("3. Calculate Total Screen Time")
+    print("4. Show Screen Time Summary")
+    print("5. Show Day with Overall Screen Time")
+    print("6. Exit\n")
+    choice = input("Choose an option (1-6): ")
 
     if choice == "1":
         dataInfo()
     elif choice == "2":
         average()
     elif choice == "3":
-        maxUsage()
-    elif choice == "4":
-        minUsage()
-    elif choice == "5":
         totalTime()
-    elif choice == "6":
+    elif choice == "4":
         summary()
-    elif choice == "7":
+    elif choice == "5":
         overallUsage()
-    elif choice == "8":
+    elif choice == "6":
         print("Goodbye!")
         break
     else:
-        print("Please choose a valid option (1-10).\n")
+        print("Please choose a valid option (1-6).\n")
